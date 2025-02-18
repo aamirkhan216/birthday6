@@ -1,19 +1,23 @@
-// Confetti Animation
+// Start confetti animation
 function startConfetti() {
-    const confettiContainer = document.createElement("div");
-    confettiContainer.classList.add("confetti-container");
-    document.body.appendChild(confettiContainer);
-
     for (let i = 0; i < 100; i++) {
         let confetti = document.createElement("div");
         confetti.classList.add("confetti");
         confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.top = Math.random() * 100 + "vh";
+        confetti.style.backgroundColor = getRandomColor();
         confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-        confettiContainer.appendChild(confetti);
+        document.body.appendChild(confetti);
     }
 }
 
-// Kiss Animation when clicking gifts
+// Random color generator for confetti
+function getRandomColor() {
+    let colors = ["red", "blue", "yellow", "green", "purple", "pink", "orange"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Show a kiss animation on click
 function showKissAnimation(x, y) {
     let kiss = document.createElement("div");
     kiss.classList.add("kiss");
@@ -27,13 +31,7 @@ function showKissAnimation(x, y) {
     }, 1500);
 }
 
-// Add event listeners to gifts
+// Run animations when page loads
 document.addEventListener("DOMContentLoaded", function () {
     startConfetti();
-    
-    document.querySelectorAll(".gift").forEach(gift => {
-        gift.addEventListener("click", function (event) {
-            showKissAnimation(event.clientX, event.clientY);
-        });
-    });
 });
